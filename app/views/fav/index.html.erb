@@ -1,0 +1,33 @@
+<% @favs.each do |f| %>
+    <div class="row">
+      <div class="col s12 m7">
+        <div class="card">
+          <% if f.contentimg!=nil %>
+              <div class="card-image">
+                <img src="<%= f.contentimg %>">
+              </div>
+          <% end %>
+          <div class="card-content">
+            <div class="left">
+              <p><%= f.datetime.in_time_zone('Tokyo').to_date%> on <%= f.provider %></p>
+            </div>
+            <div class="right">
+                  <%= link_to image_tag('/fav.png', size:'10'),
+                              fav_delete_path(:unique_id => f.unique_id, :provider => f.provider),
+                              method: :delete %>
+              お気に入り
+            </div><br/><br/>
+            <div><p><%= f.content %></p></div>
+          </div>
+          <div class="card-action">
+            <div class="left">
+              by <%= f.bywhom %>
+            </div>
+            <div class="right">
+              <img src="<%= f.bywhomimg %>" style="width:30px;height:30px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

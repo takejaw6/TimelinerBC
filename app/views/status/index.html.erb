@@ -1,0 +1,60 @@
+<script>
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+    });
+</script>
+
+<a class="grey waves-effect waves-light btn modal-trigger" href="#modal1">このサービスを楽しむためのヒント</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h5>①右上のリンクから設定ページに行き、Twitterやinstagramの認証をしよう！</h5>
+    <p>2つのSNSの更新情報が、1つのタイムラインで見れるようになります。</p><br/>
+    <h5>②星型のマークをクリックして、お気に入りリストに追加しよう！</h5>
+    <p>右上設定ページからお気に入りリストを見ることができます。投稿内の黄色の星型マークをクリックすると、お気に入りリストから削除されます。</p><br/>
+    <h5>③左上の更新ボタンを押して、最新のタイムラインを見よう！</h5>
+    <p>こちらのサービスは各SNSの最新投稿20件を表示します。</p><br/>
+  </div>
+</div><br/><br/>
+
+<% @sorted.each do |s| %>
+    <div class="row">
+      <div class="col s12 m7">
+        <div class="card">
+          <% if s.contentimg!=nil %>
+              <div class="card-image">
+                <img src="<%= s.contentimg %>">
+              </div>
+          <% end %>
+          <div class="card-content">
+            <div class="left">
+              <p><%= s.datetime.in_time_zone('Tokyo').to_date%> on <%= s.provider %></p>
+            </div>
+            <div class="right">
+              <% if current_user.favs.exists?(unique_id: s.unique_id, provider: s.provider) %>
+                  <%= link_to image_tag('/fav.png', size:'10'),
+                              fav_delete_path(:unique_id => s.unique_id, :provider => s.provider),
+                              method: :delete %>
+              <% else %>
+                  <%= link_to image_tag('/notfav.png', size:'10'),
+                              fav_add_path(:fav => {:unique_id => s.unique_id, :datetime => s.datetime, :content => s.content,
+                                           :contentimg => s.contentimg, :bywhom => s.bywhom, :bywhomimg => s.bywhomimg,
+                                           :provider => s.provider})%>
+              <% end %>
+              お気に入り
+            </div><br/><br/>
+            <div><p><%= s.content %></p></div>
+          </div>
+          <div class="card-action">
+            <div class="left">
+              by <%= s.bywhom %>
+            </div>
+            <div class="right">
+              <img src="<%= s.bywhomimg %>" style="width:30px;height:30px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

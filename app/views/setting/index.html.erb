@@ -1,0 +1,15 @@
+<div class="collection">
+  <a href="<%= root_path %>" class="center collection-item grey-text text-darken-1">最新のタイムラインを見る</a>
+  <a href="<%= favourite_path %>" class="center collection-item grey-text text-darken-1">お気に入り一覧を見る</a>
+  <a href="<%= destroy_user_session_path %>" data-method="delete" class="center collection-item grey-text text-darken-1">ログアウトする</a>
+  <% if @providers.include?('twitter') %>
+      <a href="<%= destroy_connection_path(:twitter) %>" data-method="delete" class="center collection-item grey-text text-darken-1">twitterを解除する</a>
+  <% else %>
+      <a href="/auth/twitter" class="center collection-item grey-text text-darken-1">twitterを認識する</a>
+  <% end %>
+  <% if @providers.include?('instagram') %>
+      <a href="<%= destroy_connection_path(:instagram) %>" data-method="delete" class="center collection-item grey-text text-darken-1">instagramを解除する</a>
+  <% else %>
+      <a href="/auth/instagram" class="center collection-item grey-text text-darken-1">instagramを認識する</a>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: 9.99
+  month: 9.99
+  day: 9.99
+  content: MyString
+  contentimg: MyString
+  bywhom: MyString
+  bywhomimg: MyString
+  fav: false
+
+two:
+  year: 9.99
+  month: 9.99
+  day: 9.99
+  content: MyString
+  contentimg: MyString
+  bywhom: MyString
+  bywhomimg: MyString
+  fav: false
